@@ -13,7 +13,16 @@ type Client struct {
 	*bce.BceClient
 }
 
-func NewMcpClientWithConfig(config *BosClientConfiguration) (*Client, error) {
+// BosClientConfiguration defines the config components structure by user.
+type BosMcpClientConfiguration struct {
+	Ak               string
+	Sk               string
+	Endpoint         string
+	RedirectDisabled bool
+	PathStyleEnable  bool
+}
+
+func NewMcpClientWithConfig(config *BosMcpClientConfiguration) (*Client, error) {
 	var credentials *auth.BceCredentials
 	var err error
 	ak, sk, endpoint := config.Ak, config.Sk, config.Endpoint
